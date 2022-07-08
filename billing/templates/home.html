@@ -3,20 +3,25 @@
 
 {% block title %} Home {% endblock %}
 {% block content %}
-
 <div class="row">
-    <div class="col"><h2 class="text-center my-3">Сервис управлению TV контентом</h2>
+    <div class="col"><h2 class="text-center my-3">Сервис управления TV контентом для отеля "{{ hotel_name }}" (г.{{ hotel_city }})</h2>
     </div>
 </div>
 <div class="row">
     <div class="col-md-8 mx-auto">
-        <h4 class="my-2">Для просмотра доступных тарифов ТВ-контента для отеля выберите его из списка:</h4>
-        <form method="GET" action="{% url 'list' %}" >
-        <div class="mb-3">
-            {{ form.as_p }}
+        <h4 class="my-2">(Для просмотра доступных тарифов ТВ-контента и изменения настроек нажите "НАСТРОЙТЬ")</h4>
+        <h3 class="my-4 text-center"> Список предоставляемых услуг: </h3>
+        {% for obj in object_list %}
+        <div class="card my-3" xmlns="http://www.w3.org/1999/html">
+          <h5 class="card-header">Категория номера: <strong>{{ obj.name }}<strong></h5>
+          <div class="card-body">
+              <p class="card-text">Тариф включен: {{ obj.plan }}</p>
+              <p>Фильм включен: <strong>{{ obj.film }}</strong></p>
+              <p>Депозит: <strong>{{ obj.deposit }}</strong></p>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary">Найти</button>
-        </form>
+        {% endfor %}
+        <a href="{% url 'list' %}"><button type="submit" class="btn btn-primary">НАСТРОЙТЬ</button></a>
     </div>
 </div>
 

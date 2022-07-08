@@ -12,6 +12,7 @@ class City(models.Model):
     def __str__(self):
         return self.name
 
+
 class Hotel(models.Model):
     name = CharField(max_length=50, verbose_name='Отель', unique=True)
     city = models.ForeignKey('City', on_delete=models.CASCADE, verbose_name='Город')

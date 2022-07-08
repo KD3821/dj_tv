@@ -3,34 +3,28 @@
 {% block title %} List {% endblock %}
 
 {% block content %}
-    {% if object_list %}
-        <h3 class="my-4 text-center"> Список услуг для отеля  "{{ hotel_name }}" (г.{{ hotel_city}}): </h3>
-        {% for obj in object_list %}
-        <div class="card my-3" xmlns="http://www.w3.org/1999/html">
-          <h5 class="card-header">Категория номера: <a href="{{ obj.name }}">{{ obj.name }}</a></h5>
-          <div class="card-body">
-              <p class="card-text">Тариф включен: {{ obj.plan }}</p>
-              <p>Фильм включен: <strong>{{obj.film}}</strong></p>
-              <p>Цена : <strong>{{obj.plan.price}}</strong> руб./мин.</p>
-              <a href="{% url 'edit' %}"><button class="btn btn-primary" >Изменить</button></a>
-          </div>
-        </div>
-        {% endfor %}
-    {% else %}
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-            <h3>Услуг для отеля "{{ hotel_name }}" (г.{{ hotel_city}}) не найдено...</h3>
-            </div>
-        </div>
-    {% endif %}
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <form method="GET" action="{% url 'list' %}" >
-            <div class="mb-3">
-                {{ form.as_p }}
-            </div>
-            <button type="submit" class="btn btn-primary">Найти</button>
-            </form>
-        </div>
-    </div>
+        <form method="POST">
+        <h3 class="my-4 text-center"> Список услуг для отеля  "{{ hotel_name }}" (г.{{ hotel_city }}): </h3>
+            {% csrf_token %}
+            {{ formset.as_table }}
+
+<!--        {% for obj in formset %}-->
+
+<!--        <div class="card my-3" xmlns="http://www.w3.org/1999/html">-->
+<!--          <h5 class="card-header">Категория номера: <strong>{{ obj.name }}<strong></h5>-->
+<!--          <div class="card-body">-->
+<!--              <p class="card-text">Тариф включен: {{ obj.plan }}</p>-->
+<!--              <p>Фильм включен: <strong>{{ obj.film }}</strong></p>-->
+<!--              <p>Депозит: <strong>{{ obj.deposit }}</strong></p>-->
+<!--              <div class="mb-3">-->
+<!--                {% csrf_token %}-->
+<!--              </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        {% endfor %}-->
+        <button type="submit" class="btn btn-primary" >Сохранить</button>
+        </form>
+
+
 {% endblock %}

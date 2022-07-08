@@ -4,13 +4,13 @@ from .models import City, Hotel, Room, Plan, Film, RoomDeposit
 admin.site.register(City)
 
 @admin.register(Film)
-class PlanAdmin(admin.ModelAdmin):
+class FilmAdmin(admin.ModelAdmin):
     list_display = ['name', 'price']
     list_filter = ['price']
 
 
 @admin.register(Hotel)
-class PlanAdmin(admin.ModelAdmin):
+class HotelAdmin(admin.ModelAdmin):
     list_display = ['name', 'city']
     list_filter = ['city']
 
@@ -22,11 +22,11 @@ class PlanAdmin(admin.ModelAdmin):
 
 
 @admin.register(Room)
-class DepositAdmin(admin.ModelAdmin):
+class RoomAdmin(admin.ModelAdmin):
     list_display = ['name', 'plan', 'deposit', 'film', 'hotel']
     list_filter = ['hotel']
 
 @admin.register(RoomDeposit)
-class PlanAdmin(admin.ModelAdmin):
+class DepositAdmin(admin.ModelAdmin):
     list_display = ['name', 'balance']
     list_filter = ['name']
